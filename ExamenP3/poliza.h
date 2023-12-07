@@ -101,6 +101,7 @@ public:
 
     //Funcion de Datos de Poliza de Casa
     void SetDatos() {
+        Poliza::SetDatos();
 
         std::cout << "Accediste a la poliza de Casa, ingresa los datos necesarios" << std::endl;
         std::cout << "Ingresa la medida de la casa en m2: " << std::endl;
@@ -161,6 +162,7 @@ public:
 
     //Funcion de Datos de Poliza de Carro
     void SetDatos(){
+        Poliza::SetDatos();
 
         std::cout << "Accediste a la poliza de Carro, ingresa los datos necesarios" << std::endl;
         std::cout << "Marca de carro:" << std::endl;
@@ -201,10 +203,12 @@ public:
 
     }
 
-    Vida() : enfermedades(nullptr), num(0) {}
+    Vida(std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible)
+            : Poliza(nombre, curp, nacimiento, year, edad, prestamo, deducible), enfermedades(nullptr), num(0) {}
 
     ~Vida(){
         delete[] enfermedades;
+        enfermedades = new std::string [num];
     }
 
     void setEnfermedades(){
@@ -239,6 +243,7 @@ public:
     }
 
     void SetDatos(){
+        Poliza::SetDatos();
 
         std::cout << "Accediste a la poliza de Vida, ingresa los datos necesarios" << std::endl;
         std::cout << "Tipo de Sangre: " << std::endl;
@@ -273,20 +278,20 @@ void Principal(){
     switch(elegir) {
 
         case 1: {
-            Casa casa();
-            casa().SetDatos();
+            Casa casa("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, 120.5, 1990, 12345, 567, "Mexico", "Estado", "Colonia", "Calle");
+            casa.SetDatos();
             break;
         }
 
         case 2: {
-            Carro carro();
-            carro().SetDatos();
+            Carro carro("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, "Toyota", "Corolla", 50000, 2020, 987654);
+            carro.SetDatos();
             break;
         }
 
         case 3: {
-            Vida vida();
-            vida().SetDatos();
+            Vida vida("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, "O+", nullptr, 0);
+            vida.SetDatos();
             break;
         }
 
