@@ -10,6 +10,7 @@
 class Poliza {
 public:
 
+    //Constructor de la clase Poliza, la cual contiene los datos principales o datos madre del programa
     Poliza (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible){
         this -> nombre = nombre;
         this -> curp = curp;
@@ -20,6 +21,7 @@ public:
         this -> deducible = deducible;
     }
 
+    //Funcion para generar un numero de Folio Aleatorio
     int Folio(const Poliza& poliza) {   //Esta funcion se usara para crear los Folios de forma aleatoria
         std::random_device rd;
         std::mt19937 generator(rd());
@@ -30,6 +32,7 @@ public:
         return random_number; //Retornamos el resultado para usarlo a nuestro gusto.
     }
 
+    //Apartir de aqui se crean Getters para obtener los atributos de la clase, y asi pode urilizarlos mas adelante
     std::string getNombre(){
         return this -> nombre;
     }
@@ -58,7 +61,7 @@ public:
         return this -> deducible;
     }
 
-    virtual //Funcion para pedir los datos Madre o los datos Principales
+    //Funcion para pedir los datos Madre o los datos Principales
     void SetDatos(){
         std::cout << "Ingresa Nombre: " << std::endl;
         std::cin >> nombre;
@@ -74,7 +77,7 @@ public:
         std::cout << "Ingresa Deducible: " << std::endl;
         std::cin >> deducible;
     }
-
+//Agregamos a un private para que los datos no puedan ser modificados
 private:
     std::string nombre;
     std::string curp;
@@ -83,12 +86,14 @@ private:
 };
 
 
-//Poliza de Casa
+//Creamos la clase Casa que hereda de Poliza
 class Casa : public Poliza{
 public:
 
+    //Constructor de la clase casa, en el cual comienzo poniendo sus atributos y despues llamamos al constructor de la clase base = Poliza
     Casa (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible, float medida, int antiguedad, int postal, int Nexterior, std::string pais, std::string estado, std::string colonia, std::string calle)
-    : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+            : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+        //Inicializacion de atributos de Casa
         this -> medida = medida;
         this -> antiguedad = antiguedad;
         this -> postal = postal;
@@ -99,8 +104,9 @@ public:
         this -> calle = calle;
     }
 
-    //Funcion de Datos de Poliza de Casa
+    //Funcion para solicitar Datos de Poliza de Casa
     void SetDatos() {
+        //Aqui llamamos a la funcion SetDatos de la clase base o la base madre Poliza
         Poliza::SetDatos();
 
         std::cout << "Accediste a la poliza de Casa, ingresa los datos necesarios" << std::endl;
@@ -128,9 +134,9 @@ public:
             std::cout << "Numero Exterior: " << std::endl;
             std::cin >> Nexterior;
 
-            //Aqui imprimimos todos los datos que se escribieron anteriormente, agregando los de la poliza señalada
+            // Aqui imprimimos_todo lo que se escribio en los datos principales de la clase Poliza, agregando los de la poliza de casa
             std::cout << "El cliente " << getNombre() << " con " << getEdad() << " anios de edad, de CURP " << getCurp()
-                      << "con un prestamo de $" << getPrestamo() << "y su deducible de $" << getDeducible()
+                      << " con un prestamo de $" << getPrestamo() << " y su deducible de $" << getDeducible()
                       << " se ha registrado para una poliza de Casa con los siguientes datos:" << std::endl;
             std::cout << "Medida de casa en m2: " << medida << std::endl;
             std::cout << "Anio en que se construyo la casa: " << antiguedad << std::endl;
@@ -139,7 +145,7 @@ public:
             std::cout << "Folio de Poliza: " << Folio(*this) << std::endl;
         }
     }
-
+//Agregamos a un private para que los datos no puedan ser modificados
 private:
     float medida;
     int antiguedad, postal, Nexterior;
@@ -148,11 +154,14 @@ private:
 };
 
 
-//Poliza de Carro
+//Creamos la clase Carro que hereda de Poliza
 class Carro : public Poliza{
 public:
+
+    //Constructor de la clase carro, en el cual comienzo poniendo sus atributos y despues llamamos al constructor de la clase base = Poliza
     Carro (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible, std::string marca, std::string modelo, int km, int anio, int serial)
-    : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+            : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+        //Inicializacion de atributos de Carro
         this -> marca = marca;
         this -> modelo = modelo;
         this -> km = km;
@@ -160,8 +169,9 @@ public:
         this -> serial = serial;
     }
 
-    //Funcion de Datos de Poliza de Carro
+    //Funcion para solicitar Datos de Poliza de Carro
     void SetDatos(){
+        //Aqui llamamos a la funcion SetDatos de la clase base o la base madre Poliza
         Poliza::SetDatos();
 
         std::cout << "Accediste a la poliza de Carro, ingresa los datos necesarios" << std::endl;
@@ -176,9 +186,9 @@ public:
         std::cout << "Numero de serie del carro: " << std::endl;
         std::cin >> serial;
 
-        //Aqui imprimimos todos los datos que se escribieron anteriormente, agregando los de la poliza señalada
+        //Aqui imprimimos_todo lo que se escribio en los datos principales de la clase Poliza, agregando los de la poliza de carro
         std::cout << "El cliente " << getNombre() << " con " << getEdad() << " anios de edad, de CURP " << getCurp()
-                  << "con un prestamo de $" << getPrestamo() << "y su deducible de $" << getDeducible()
+                  << " con un prestamo de $" << getPrestamo() << " y su deducible de $" << getDeducible()
                   << " se ha registrado para una poliza de Casa con los siguientes datos:" << std::endl;
         std::cout << "Marca: " << marca << std::endl;
         std::cout << "Modelo: " << modelo << std::endl;
@@ -187,30 +197,37 @@ public:
         std::cout << "Numero de Serie: " << serial << std::endl;
         std::cout << "Folio de Poliza: " << Folio(*this) << std::endl;
     }
-
+//Agregamos a un private para que los datos no puedan ser modificados
 private:
     int km, anio, serial;
     std::string marca, modelo;
 };
 
+//Creamos la clase Vida que hereda de Poliza
 class Vida : public Poliza {
 public:
+
+    //Constructor de la clase Vida, en el cual comienzo poniendo sus atributos y despues llamamos al constructor de la clase base = Poliza
     Vida (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible, std::string sangre, std::string* enfermedades, int num)
-    : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+            : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+        //Inicializacion de atributos de Vida
         this -> sangre = sangre;
         this -> enfermedades = enfermedades;
         this -> num = num;
 
     }
 
+    //Aqui hacemos un constructor adicional para el caso donde no se proporcionan enfermedades
     Vida(std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible)
             : Poliza(nombre, curp, nacimiento, year, edad, prestamo, deducible), enfermedades(nullptr), num(0) {}
 
+    // Destructor para liberar la memoria de enfermedades
     ~Vida(){
         delete[] enfermedades;
         enfermedades = new std::string [num];
     }
 
+    //Funcion para solicitar la cantidad y nombre de enfermedades
     void setEnfermedades(){
         while (true){
             std::cout << "Numero de enfermedades: ";
@@ -235,6 +252,7 @@ public:
         }
     }
 
+    //Funcion para mostrar las enfermedades del paciente
     void DatosEnfermedad() const {
         std::cout << "Enfermedades del paciente" << std::endl;
         for (int i = 0; i < num; ++i) {
@@ -242,28 +260,33 @@ public:
         }
     }
 
+    //Funcion para solicitar Datos de Poliza de Vida
     void SetDatos(){
+        //Aqui llamamos a la funcion SetDatos de la clase base o la base madre Poliza
         Poliza::SetDatos();
 
         std::cout << "Accediste a la poliza de Vida, ingresa los datos necesarios" << std::endl;
         std::cout << "Tipo de Sangre: " << std::endl;
         std::cin >> sangre;
-        setEnfermedades();
+        setEnfermedades(); //Agregamos la funcion para que pida los datos de enfermedades
 
+        //Aqui imprimimos_todo lo que se escribio en los datos principales de la clase Poliza, agregando los de la poliza de Vida
         std::cout << "El cliente " << getNombre() << " con " << getEdad() << " anios de edad, de CURP " << getCurp()
-                  << "con un prestamo de $" << getPrestamo() << "y su deducible de $" << getDeducible()
+                  << " con un prestamo de $" << getPrestamo() << " y su deducible de $" << getDeducible()
                   << " se ha registrado para una poliza de Casa con los siguientes datos:" << std::endl;
         std::cout << "Tipo de Sangre del cliente: " << sangre << std::endl;
-        DatosEnfermedad();
+        DatosEnfermedad(); //Agregamos la funcion para que lo imprima
         std::cout << "Folio de Poliza: " << Folio(*this) << std::endl;
     }
 
+//Agregamos a un private para que los datos no puedan ser modificados
 private:
     std::string sangre;
     std::string* enfermedades;
     int num;
 };
 
+//Funcion principal que se usara como un menu para que el usuario interactue y cree las polizas necesarias
 void Principal(){
 
     int elegir;
@@ -275,30 +298,36 @@ void Principal(){
     std::cout << "4.Salir" << std::endl;
     std::cin >> elegir;
 
+    //Usamos un switch para tener diferentes opciones de polizas
     switch(elegir) {
 
+        // Crear una instancia de Casa y llamar a SetDatos para solicitar la información
         case 1: {
             Casa casa("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, 120.5, 1990, 12345, 567, "Mexico", "Estado", "Colonia", "Calle");
             casa.SetDatos();
             break;
         }
 
+            // Crear una instancia de Carro y llamar a SetDatos para solicitar la información
         case 2: {
             Carro carro("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, "Toyota", "Corolla", 50000, 2020, 987654);
             carro.SetDatos();
             break;
         }
 
+            // Crear una instancia de Vida y llamar a SetDatos para solicitar la información
         case 3: {
             Vida vida("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, "O+", nullptr, 0);
             vida.SetDatos();
             break;
         }
 
+            // Creamos una instancia de salida, para que el usuario pueda salir del programa
         case 4: {
             exit(0);
         }
 
+            // En caso de no seleccionar una de las 4 opciones anteriores aparecera esto
         default:
             std::cout << "Opcion Invalida";
     }
