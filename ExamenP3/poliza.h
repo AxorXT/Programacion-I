@@ -234,18 +234,25 @@ public:
             std::string numStr;
             std::getline(std::cin, numStr);
 
+            //Verifica si la entrada es un numero valido y no esta vacia
             if (std::all_of (numStr.begin(), numStr.end(), ::isdigit) && !numStr.empty()){
+                // Convierte la cadena a un entero y asigna el valor a "num"
                 num = std::stoi(numStr);
                 break;
             } else {
+                // Muestra un mensaje de error si la entrada no es válida
                 std::cerr << "Ingresa un numero de enfermedades valido" << std::endl;
             }
         }
 
+        // Libera la memoria asignada previamente al arreglo "enfermedades"
         delete[] enfermedades;
+        // Asigna dinámicamente un nuevo arreglo de cadenas de longitud "num"
         enfermedades = new std::string[num];
+        // Muestra un mensaje solicitando al usuario ingresar los nombres de las enfermedades una por una
         std::cout << "Nombre de enfermedades una por una: " << std::endl;
 
+        // Utiliza un bucle para solicitar y almacenar cada nombre de enfermedad en el arreglo
         for(int i = 0; i < num; ++i){
             std::cout << "Enfermedad " << i + 1 << ": ";
             std::getline(std::cin, enfermedades[i]);
