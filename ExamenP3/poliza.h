@@ -10,6 +10,16 @@
 class Poliza {
 public:
 
+    Poliza (){
+        this -> nombre = "";
+        this -> curp = "";
+        this -> nacimiento = "";
+        this -> year = 0;
+        this -> edad = 0;
+        this -> prestamo = 0;
+        this -> deducible = 0;
+    }
+
     //Constructor de la clase Poliza, la cual contiene los datos principales o datos madre del programa
     Poliza (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible){
         this -> nombre = nombre;
@@ -90,9 +100,20 @@ private:
 class Casa : public Poliza{
 public:
 
+    Casa():Poliza(){
+        this -> medida = 0;
+        this -> antiguedad = 0;
+        this -> postal = 0;
+        this -> Nexterior = 0;
+        this -> pais = "";
+        this -> estado = "";
+        this -> colonia = "";
+        this -> calle = "";
+    }
+
     //Constructor de la clase casa, en el cual comienzo poniendo sus atributos y despues llamamos al constructor de la clase base = Poliza
-    Casa (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible, float medida, int antiguedad, int postal, int Nexterior, std::string pais, std::string estado, std::string colonia, std::string calle)
-            : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+    Casa (float medida, int antiguedad, int postal, int Nexterior, std::string pais, std::string estado, std::string colonia, std::string calle)
+            : Poliza (){
         //Inicializacion de atributos de Casa
         this -> medida = medida;
         this -> antiguedad = antiguedad;
@@ -158,9 +179,17 @@ private:
 class Carro : public Poliza{
 public:
 
+    Carro():Poliza(){
+        this -> marca = "";
+        this -> modelo = "";
+        this -> km = 0;
+        this -> anio = 0;
+        this -> serial = 0;
+    }
+
     //Constructor de la clase carro, en el cual comienzo poniendo sus atributos y despues llamamos al constructor de la clase base = Poliza
-    Carro (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible, std::string marca, std::string modelo, int km, int anio, int serial)
-            : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+    Carro (std::string marca, std::string modelo, int km, int anio, int serial)
+            : Poliza (){
         //Inicializacion de atributos de Carro
         this -> marca = marca;
         this -> modelo = modelo;
@@ -207,9 +236,15 @@ private:
 class Vida : public Poliza {
 public:
 
+    Vida():Poliza(){
+        this -> sangre = "";
+        this -> enfermedades = 0;
+        this -> num = 0;
+    }
+
     //Constructor de la clase Vida, en el cual comienzo poniendo sus atributos y despues llamamos al constructor de la clase base = Poliza
-    Vida (std::string nombre, std::string curp, std::string nacimiento, int year, int edad, int prestamo, int deducible, std::string sangre, std::string* enfermedades, int num)
-            : Poliza (nombre, curp, nacimiento, year, edad, prestamo, deducible){
+    Vida (std::string sangre, std::string* enfermedades, int num)
+            : Poliza (){
         //Inicializacion de atributos de Vida
         this -> sangre = sangre;
         this -> enfermedades = enfermedades;
@@ -310,21 +345,21 @@ void Principal(){
 
         // Crear una instancia de Casa y llamar a SetDatos para solicitar la información
         case 1: {
-            Casa casa("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, 120.5, 1990, 12345, 567, "Mexico", "Estado", "Colonia", "Calle");
+            Casa casa;
             casa.SetDatos();
             break;
         }
 
             // Crear una instancia de Carro y llamar a SetDatos para solicitar la información
         case 2: {
-            Carro carro("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, "Toyota", "Corolla", 50000, 2020, 987654);
+            Carro carro;
             carro.SetDatos();
             break;
         }
 
             // Crear una instancia de Vida y llamar a SetDatos para solicitar la información
         case 3: {
-            Vida vida("nombre", "curp", "nacimiento", 2023, 30, 100000, 5000, "O+", nullptr, 0);
+            Vida vida;
             vida.SetDatos();
             break;
         }
